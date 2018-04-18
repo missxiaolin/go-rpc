@@ -3,9 +3,9 @@ package main
 import (
 	"net"
 	"fmt"
-	"services"
-	"proto"
-	"utils"
+	"go-rpc/services"
+	"go-rpc/proto"
+	"go-rpc/utils"
 	"reflect"
 )
 

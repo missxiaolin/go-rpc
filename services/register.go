@@ -3,7 +3,7 @@ package services
 import (
 	"reflect"
 	"fmt"
-	"services/test"
+	"go-rpc/services/test"
 )
 
 // 定义控制器函数Map类型，便于后续快捷使用
