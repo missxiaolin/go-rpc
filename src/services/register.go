@@ -18,7 +18,7 @@ func registerService(name string, service ServiceInterface) {
 	mNum := vf.NumMethod()
 	fmt.Println("NumMethod:", mNum)
 
-	//遍历路由器的方法，并将其存入控制器映射变量中
+	// 遍历路由器的方法，并将其存入控制器映射变量中
 	for i := 0; i < mNum; i++ {
 		mName := vft.Method(i).Name
 		fmt.Println("index:", i, " MethodName:", mName)

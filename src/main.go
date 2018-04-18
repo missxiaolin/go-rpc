@@ -6,6 +6,7 @@ import (
 	"services"
 	"proto"
 	"utils"
+	"reflect"
 )
 
 func handle(conn *net.TCPConn) {
@@ -18,7 +19,24 @@ func handle(conn *net.TCPConn) {
 
 	fmt.Println("接收到客户端的消息：", string(bys))
 
+	// 解析JSON数据
+	data := proto.RequestBytes(bys)
+	var service = data.Service
+	var method = utils.StrFirstToUpper(data.Method)
+	var arguments = data.Arguments
 
+	//创建带调用方法时需要传入的参数列表
+	parms := []reflect.Value{}
+	for _, v := range arguments {
+		parms = append(parms, reflect.ValueOf(v))
+	}
+
+	//使用方法名字符串调用指定方法
+	var function = services.ServiceMappers[service][method]
+	var result = function.Call(parms)
+	fmt.Println("数据结果", result)
+
+	conn.Write(proto.ResponseSuccess(result[0]))
 }
 
 func main()  {
